@@ -1,0 +1,71 @@
+.top-bar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    font-family: Inter, sans-serif;
+
+}
+.logo-text{
+    font-size: calc(16px + 3vmin);
+    margin-left: 2.5%;
+}
+.top-bar-center{
+    display: flex;
+    flex-grow: 2;
+    justify-content: flex-start;
+}
+.top-bar-right{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-content: center;
+}
+.info-nav{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.top-bar-left{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin-right: 5%;
+}
+.top-text{
+    font-size: calc(8px + 1vmin);
+    padding-left: 2em;
+    padding-right: 2em;
+    color: white;
+}
+.top-text:hover{
+    color: lightgreen;
+}
+.profile-div{
+}
+@media only screen and (max-width: 600px) {
+    .top-bar {
+        flex-direction: column;
+        height: min-content;
+    }
+    .info-nav{
+        align-content: space-between;
+    }
+    .top-bar-center{
+        display: none;
+    }
+    .logo-text{
+        font-size: 20px;
+        margin-top:3px;
+        margin-bottom: 0;
+    }
+    .chevron-profile{
+        height: 10px;
+    }
+}

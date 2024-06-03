@@ -1,0 +1,48 @@
+.transaction-list {
+    border-radius: 8px;
+    box-shadow: 0 0 2px 2px #bebebe;
+    padding: 10px;
+}
+.transaction_element{
+    padding: 2px;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    border-color: #bebebe;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    border-width: 1px;
+    width: 100%;
+}
+.transaction-list-header{
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    width: 100%;
+}
+.transaction_element__amount{
+    text-align: center;
+}
+.transaction-list-title{
+    margin: 0;
+    font-size: large;
+    font-weight: bold;
+}
+.transaction-list-column-title{
+    font-weight: lighter;
+}
+@media only screen and (max-width: 600px) {
+    .transaction_element__account{
+        display: none;
+    }
+    .transaction_element__date{
+        display: none;
+    }
+    .transaction-list-column-title-account{
+        display: none;
+    }
+    .transaction-list-column-title-date{
+        display: none;
+    }
+    .transaction-list{
+        width: min-content;
+    }
+}
