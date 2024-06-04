@@ -1,7 +1,10 @@
 .transaction-list {
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0 0 2px 2px #bebebe;
     padding: 10px;
+}
+.transactionList_empty{
+    color: #9fee9f;
 }
 .transaction_element{
     padding: 2px;

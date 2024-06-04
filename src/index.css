@@ -49,20 +49,33 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+  .search-bar-button:hover{
+    background-color: lightgreen;
+    color: #020202;
+  }
 }
 @media (prefers-color-scheme: dark) {
   .page-body {
-    color: #aad7d7;
+    color: #bbbbbb;
     background-color:#121212;
   }
   .dashboard-number-card{
-    background-color: #273949;
+    background-color: #545454;
   }
   :root{
     background-color: #121212;
   }
-  a:hover {
-    color: #747bff;
+  .search-bar-button {
+    background-color: #bbbbbb;
+  }
+  .search-bar-button {
+    color: lightgreen;
+    background-color: transparent;
+    border: none;
+  }
+  .search-bar-button:hover{
+    background-color: lightgreen;
+    color: #ffffff;
   }
   button {
     background-color: #f9f9f9;

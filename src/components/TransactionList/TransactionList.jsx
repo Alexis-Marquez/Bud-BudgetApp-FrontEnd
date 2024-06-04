@@ -1,5 +1,23 @@
 import "./TransactionList.css"
 const TransactionList = ({transactions}) => {
+    if(!transactions || !transactions.length) {
+        return (
+            <div className="transaction-list">
+                <div className="transactionList_loading">
+                    <p>Loading your most recent transactions...</p>
+                </div>
+            </div>
+        )
+    }
+    if (transactions && transactions.length == 0) {
+        return (
+            <div className="transaction-list">
+                <div className="transactionList_empty">
+                    <p>Your Transaction List is empty, try adding a transaction to start!</p>
+                </div>
+            </div>
+        )
+    }
     return(
         <div className="transaction-list">
             <p className="transaction-list-title">Recent Transactions</p>
@@ -9,18 +27,18 @@ const TransactionList = ({transactions}) => {
                 <p className="transaction-list-column-title-date">Date and Time</p>
                 <p className="transaction-list-column-title-amount">Transaction Amount</p>
             </div>
-            {transactions?.map((transaction) => (
-                <div className="transaction_element" key={transaction.id}>
-                    <div className="transaction_element__name">
+            {transactions.map((transaction) => (
+                <div className="transaction_element" key={transaction.id.timestamp+transaction.amount}>
+                    <div className="transaction_element__name" key={transaction.userId+transaction.id}>
                         {transaction.name}
                     </div>
-                    <div className="transaction_element__account">
+                    <div className="transaction_element__account" key={transaction.accountId}>
                         {transaction.accountName}
                     </div>
-                    <div className="transaction_element__date">
+                    <div className="transaction_element__date" key={transaction.time + transaction.id}>
                         {transaction.time}
                     </div>
-                    <div className="transaction_element__amount">
+                    <div className="transaction_element__amount" key={transaction.id+transaction.amount}>
                         {transaction.amount}
                     </div>
                 </div>

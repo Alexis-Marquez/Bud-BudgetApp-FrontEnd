@@ -3,6 +3,7 @@ import DashboardCard from "../totalDashboard/DashboardCard.jsx";
 import "./Home.css"
 import TransactionList from "../TransactionList/TransactionList.jsx";
 import api from "../../API/axiosConfig.js";
+import SearchBar from "../searchBar/SearchBar.jsx";
 const Home = ({accounts})=>{
     const [totalBalance, setTotalBalance] = useState(null);
     const [transactions, setTransactions] = useState([]);
@@ -35,9 +36,7 @@ const Home = ({accounts})=>{
     }
     return(
         <div className="page-body">
-            <form className="search-bar-form">
-                <p className="search-bar"> Hello</p>
-            </form>
+            <SearchBar></SearchBar>
             <DashboardCard totalBalance={totalBalance}></DashboardCard>
             <div className="trans-button">
             <button className="add-trans-button"> Add Transaction</button>
