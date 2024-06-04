@@ -52,7 +52,11 @@
 @media only screen and (max-width: 600px) {
     .top-bar {
         flex-direction: column;
+        align-items: center;
         height: min-content;
+    }
+    .top-bar-left{
+        margin: 0;
     }
     .info-nav{
         align-content: space-between;

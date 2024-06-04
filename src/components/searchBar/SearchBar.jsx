@@ -2,9 +2,9 @@ import React from "react";
 import"../home/Home.css"
 import SearchIcon from '@mui/icons-material/Search';
 
-function searchIcon(){
+function SearchIconDiv(){
     return(
-        <SearchIcon />
+        <SearchIcon className="SearchIcon"/>
     )
 }
 const SearchBar = () => {
@@ -12,9 +12,9 @@ const SearchBar = () => {
         <div className="search-bar">
             <form className="search-bar-form">
                 <button type="submit" className="search-bar-button">
-                    <SearchIcon></SearchIcon>
+                    <SearchIconDiv></SearchIconDiv>
                 </button>
-                <input className="search-bar-input" type="text" placeholder="Search"/>
+                <input className="search-bar-input" type="text" placeholder="Search Transactions"/>
             </form>
         </div>
     )

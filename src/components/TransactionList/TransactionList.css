@@ -9,7 +9,7 @@
 .transaction_element{
     padding: 2px;
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     border-color: #bebebe;
     border-bottom-style: solid;
     border-top-style: solid;
@@ -18,11 +18,8 @@
 }
 .transaction-list-header{
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     width: 100%;
-}
-.transaction_element__amount{
-    text-align: center;
 }
 .transaction-list-title{
     margin: 0;
@@ -33,10 +30,19 @@
     font-weight: lighter;
 }
 @media only screen and (max-width: 600px) {
+    .transaction_element{
+        grid-template-columns: 3fr 1fr;
+    }
+    .transaction-list-header{
+        grid-template-columns: 3fr 1fr;
+    }
     .transaction_element__account{
         display: none;
     }
     .transaction_element__date{
+        display: none;
+    }
+    .transaction_element__category{
         display: none;
     }
     .transaction-list-column-title-account{
@@ -45,7 +51,7 @@
     .transaction-list-column-title-date{
         display: none;
     }
-    .transaction-list{
-        width: min-content;
+    .transaction-list-column-title-category{
+        display: none;
     }
 }
