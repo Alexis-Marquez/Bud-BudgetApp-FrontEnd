@@ -1,4 +1,5 @@
 import "./TransactionList.css"
+import BalanceNumber from "../BalanceNumber.jsx";
 const TransactionList = ({transactions}) => {
     if(!transactions || !transactions.length) {
         return (
@@ -9,7 +10,7 @@ const TransactionList = ({transactions}) => {
             </div>
         )
     }
-    if (transactions && transactions.length == 0) {
+    if (transactions && transactions.length === 0) {
         return (
             <div className="transaction-list">
                 <div className="transactionList_empty">
@@ -43,7 +44,7 @@ const TransactionList = ({transactions}) => {
                         {transaction.time}
                     </div>
                     <div className="transaction_element__amount" key={transaction.id + transaction.amount}>
-                        {transaction.amount}
+                        {<BalanceNumber amount={transaction.amount}></BalanceNumber>}
                     </div>
                 </div>
             ))}
