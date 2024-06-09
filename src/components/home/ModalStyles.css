@@ -14,3 +14,7 @@
     background-color: #121212;
     padding: 50px;
 }
+.form-transaction{
+    display: flex;
+    flex-direction: column;
+}

@@ -28,7 +28,7 @@ const Home = ({accounts})=>{
     )
     useEffect(()=>{
         getTransactions()
-    },[])
+    },[transactions])
     if (totalBalance === null) {
         // Render a loading state or placeholder
         return <p>Loading...</p>;
@@ -40,7 +40,7 @@ const Home = ({accounts})=>{
         <div id="page-body">
 
             <SearchBar></SearchBar>
-            <TransFormModal showTransForm={showTransForm} handleClose={()=>setShowTransForm(false)}></TransFormModal>
+            <TransFormModal showTransForm={showTransForm} handleClose={()=>setShowTransForm(false)} accounts={accounts}></TransFormModal>
             <DashboardCard totalBalance={totalBalance}></DashboardCard>
             <div className="trans-button">
             <button className="add-trans-button" onClick={()=>setShowTransForm(true)}> Add Transaction</button>
