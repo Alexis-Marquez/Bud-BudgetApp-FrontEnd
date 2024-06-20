@@ -7,14 +7,173 @@
     background-color: rgba(0,0,0,.5);
 }
 .modal-form-container{
+    color: white;
     position: fixed;
+    border-radius: 16px;
     top: 50%;
     left: 50%;
+    width: 40%;
+    height: 50%;
     transform: translate(-50%, -50%);
-    background-color: #121212;
-    padding: 50px;
-}
-.form-transaction{
+    transition: 0.2s;
+    background-color: #1e1e1e;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+.form-transaction{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+}
+.input-group-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input-group{
+    font-size: larger;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.modal-toggle{
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+}
+.modal-body{
+    width: 100%;
+    height: 100%;
+}
+.modal-header{
+    font-size: x-large;
+}
+.form-body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.form-group{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+}
+.modal-form-container button{
+    border-radius: 8px;
+    color: white;
+    background-color: #1e1e1e;
+    width: 100px;
+    height: 25px;
+}
+.modal-form-container input, select, textarea{
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: small;
+}
+.modal-form-container input, select{
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #9fee9f;
+    border-radius: 8px;
+    transition: 0.4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    border-radius: 8px;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
+input:checked + .slider {
+    background-color: #fa2424;
+}
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+#toggleSwitch:checked + .modal-form-container {
+    background-color: rgba(250, 36, 36, 0.62);
+}
+
+@media (prefers-color-scheme: light) {
+    .modal-form-container{
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+    .modal-toggle{
+        color: white;
+    }
+    .input-group{
+        color: white;
+    }
+    .input-group-col{
+        color: white;
+    }
+    .modal-form-container button{
+        color: black;
+        background-color: #ffffff;
+    }
+    .modal-form-container input, select, textarea{
+        border-radius: 8px;
+        background-color: #ffffff;
+        color: #020202;
+    }
+}
+@media only screen and (max-width: 600px)  {
+    .form-group{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        width: 50%;
+    }
+    .form-body{
+        height: max-content;
+        display: flex;
+    }
+    .form-transaction{
+        justify-content: space-evenly;
+
+    }
+    .modal-toggle{
+        width: 100%;
+    }
+    .input-group{
+        font-size: large;
+        flex-direction: column;
+    }
+    .modal-form-container{
+        width: 80%;
+        height: 80%;
+    }
+    .modal-form-container input, select, textarea{
+    font-size: x-small;
+}
 }

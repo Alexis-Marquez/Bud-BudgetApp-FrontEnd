@@ -3,9 +3,10 @@ import DashboardCard from "../totalDashboard/DashboardCard.jsx";
 import "./Home.css"
 import TransactionList from "../transactionList/TransactionList.jsx";
 import api from "../../API/axiosConfig.js";
-import SearchBar from "../searchBar/SearchBar.jsx";
+import SearchBar from "./SearchBar.jsx";
 import TransFormModal from "./TransFormModal.jsx";
-const Home = ({accounts})=>{
+import EditBudgetButton from "./EditBudgetButton.jsx";
+const Home = ({accounts, currBudget,getAccounts,getCurrBudget})=>{
     const [totalBalance, setTotalBalance] = useState(null);
     const [transactions, setTransactions] = useState([]);
     const[showTransForm, setShowTransForm] = useState(false);
@@ -28,7 +29,7 @@ const Home = ({accounts})=>{
     )
     useEffect(()=>{
         getTransactions()
-    },[transactions])
+    },[])
     if (totalBalance === null) {
         // Render a loading state or placeholder
         return <p>Loading...</p>;
@@ -38,10 +39,10 @@ const Home = ({accounts})=>{
     }
     return(
         <div id="page-body">
-
+            <EditBudgetButton></EditBudgetButton>
             <SearchBar></SearchBar>
-            <TransFormModal showTransForm={showTransForm} handleClose={()=>setShowTransForm(false)} accounts={accounts}></TransFormModal>
-            <DashboardCard totalBalance={totalBalance}></DashboardCard>
+            <TransFormModal showTransForm={showTransForm} accounts={accounts} getTransactions={getTransactions} getAccounts={getAccounts} getCurrBudget={getCurrBudget} setShowTransForm={setShowTransForm}></TransFormModal>
+            <DashboardCard AccountsTotalBalance={totalBalance} budgetBalance={currBudget}></DashboardCard>
             <div className="trans-button">
             <button className="add-trans-button" onClick={()=>setShowTransForm(true)}> Add Transaction</button>
             </div>

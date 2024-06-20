@@ -3,7 +3,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 2fr 1fr;
     grid-template-areas:
-    ". search-bar2 search-bar"
+    "edit-budget search-bar search-bar"
     "dashboard-card dashboard-card dashboard-card"
     ". trans-button ."
     "transaction-list transaction-list transaction-list"
@@ -47,12 +47,31 @@
     color: white;
     width: 70%;
     height: 80%;
+    box-shadow: 0 0 2px 2px #bebebe;
+    border-radius: 8px;
+    border: none;
+}
+.editBudgetButton{
+    grid-area: edit-budget;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.editBudgetButtonAction{
+    background-color: black;
+    color: white;
+    width: 40%;
+    height: 40%;
+    box-shadow: 0 0 2px 2px #bebebe;
+    border-radius: 8px;
+    border: none;
 }
 .search-bar{
     grid-area: search-bar;
     display: flex;
     justify-content: flex-start;
     height: min-content;
+    border-radius: 8px;
     box-shadow: 0 0 2px 2px #bebebe;
 }
 .search-bar-input{
@@ -106,13 +125,18 @@
         width: 75%;
     }
     .search-bar{
-        grid-area: search-bar2;
+        grid-area: search-bar;
+        width: 95%;
     }
     .search-bar-form{
-        justify-content: space-between;
+        width: 90%;
     }
     .SearchIcon{
         font-size: x-small;
+    }
+    .editBudgetButtonAction{
+        width: 100%;
+        height: min-content;
     }
     .balance-number{
         font-size: small;
@@ -172,8 +196,5 @@
     .search-bar-button:hover{
         background-color: lightgreen;
         color: #ffffff;
-    }
-    button {
-        background-color: #f9f9f9;
     }
 }

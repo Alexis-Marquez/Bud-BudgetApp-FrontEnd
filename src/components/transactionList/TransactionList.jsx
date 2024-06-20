@@ -41,7 +41,7 @@ const TransactionList = ({transactions}) => {
                         {transaction.accountName}
                     </div>
                     <div className="transaction_element__date" key={transaction.time + transaction.id}>
-                        {transaction.time}
+                        {String(new Date(transaction.time).getMonth()).padStart(2, "0")}/{String(new Date(transaction.time).getDate()).padStart(2,'0')}/{new Date(transaction.time).getFullYear()} {String(new Date(transaction.time).getHours()).padStart(2,'0')}:{String(new Date(transaction.time).getMinutes()).padStart(2,'0')}
                     </div>
                     <div className="transaction_element__amount" key={transaction.id + transaction.amount}>
                         {<BalanceNumber amount={transaction.amount}></BalanceNumber>}

@@ -1,5 +1,5 @@
 import React from "react";
-import"../home/Home.css"
+import"./Home.css"
 import SearchIcon from '@mui/icons-material/Search';
 
 function SearchIconDiv(){
