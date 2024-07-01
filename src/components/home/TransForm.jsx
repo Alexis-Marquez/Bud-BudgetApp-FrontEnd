@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import api from "../../API/axiosConfig.js";
 import ModalToggle from "./ModalToggle";
-const TransForm = ({accounts, handleClose, isToggled, handleToggle})=>{
+const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})=>{
 
     const [formValue, setFormValue] = React.useState({
         Amount: '',
@@ -12,24 +12,13 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle})=>{
         Description: '',
         Type: ''
     });
-    const [categories, setCategories] = useState([]);
-    const getCategories = async () => {
-        try {
-            const response = await api.get("/api/8da906f9-4e26-41e1-b9e3-2c1c1878e6bb/categories");
-            setCategories(response.data);
-        } catch (err) {
-            return <p>Error: {err.message}</p>;
-        }
-    }
+
     const handleChange = (event) => {
         setFormValue({
             ...formValue,
             [event.target.name]: event.target.value
         });
     }
-    useEffect(() => {
-        getCategories();
-    }, []);
     const handleSubmit = async() => {
         event.preventDefault();
         let type;
@@ -62,7 +51,7 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle})=>{
     return (
         <form className="form-transaction" onSubmit={handleSubmit}
               style={{background: isToggled ? 'rgb(103,134,103)' : 'rgb(107,47,47)'}}>
-            <ModalToggle handleToggle={handleToggle}></ModalToggle>
+            <ModalToggle handleToggle={handleToggle} isToggled={isToggled}></ModalToggle>
             <div className="form-body">
                 <div className="form-group">
                     <div className="input-group">
@@ -80,7 +69,7 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle})=>{
             <div className="form-group">
                 <div className="input-group">
                     <label htmlFor="category-input">Category: </label>
-                    <select id="account-input" name="AccountId" onChange={handleChange} defaultValue="">
+                    <select id="account-input" name="Category" onChange={handleChange} defaultValue="">
                         <option value="" disabled>Choose a category</option>
                         {categories?.map((category) => (
                             <option key={category.id} value={category.name}>{category.name}</option>
@@ -108,7 +97,7 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle})=>{
                     <textarea id="description-input" onChange={handleChange} placeholder="Optional short description" name="Description"/>
                 </div>
             </div>
-            <button type="submit"> Submit</button>
+            <button type="submit" style={{backgroundColor: isToggled ? 'rgb(103,134,103)' : 'rgb(107,47,47)'}}> Submit</button>
         </form>
     )
 }

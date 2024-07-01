@@ -29,7 +29,27 @@
 .transaction-list-column-title{
     font-weight: lighter;
 }
-@media only screen and (max-width: 600px) {
+.transaction-list-nav{
+    display: flex;
+    width: 30%;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+    column-gap: 3px;
+}
+.nav-btn{
+    width: 20%;
+    border-radius: 8px;
+}
+.nav-button{
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    font-size: large;
+    width: 100%;
+}
+@media only screen and (max-width:
+        600px) {
     .transaction_element{
         grid-template-columns: 3fr 1fr;
     }
@@ -54,4 +74,20 @@
     .transaction-list-column-title-category{
         display: none;
     }
+    .transaction-list-nav{
+        width: 100%;
+        justify-content: center;
+    }
+    .nav-btn{
+        width: 20%;
+        border-radius: 8px;
+    }
+    .nav-button{
+        width: 100%;
+    }
+}
+@media (prefers-color-scheme: light) {
+.nav-button {
+    color: black;
+}
 }

@@ -1,11 +1,28 @@
 import "./TransactionList.css"
 import BalanceNumber from "../BalanceNumber.jsx";
-const TransactionList = ({transactions}) => {
-    if(!transactions || !transactions.length) {
+import React, {useEffect, useState} from "react";
+import userService from "../../services/userService.js";
+import NavButton from "./NavButton.jsx";
+const TransactionList = ({transactions, transactionNumber}) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const getTransactions = (page) => {
+        userService.getTransactionsPage(page).then((response)=> {
+        })
+    }
+    if(!transactions ) {
         return (
             <div className="transaction-list">
                 <div className="transactionList_loading">
                     <p>Loading your most recent transactions...</p>
+                </div>
+            </div>
+        )
+    }
+    if(transactions.length===0){
+        return (
+            <div className="transaction-list">
+                <div className="transactionList_loading" style={{textAlign: "center", color:"lightgreen"}}>
+                    <p>Add a transaction to start tracking your budget!</p>
                 </div>
             </div>
         )
@@ -26,7 +43,7 @@ const TransactionList = ({transactions}) => {
                 <p className="transaction-list-column-title-name">Transaction Name</p>
                 <p className="transaction-list-column-title-category">Category</p>
                 <p className="transaction-list-column-title-account">Account Name</p>
-                <p className="transaction-list-column-title-date">Date and Time</p>
+                <p className="transaction-list-column-title-date">Date</p>
                 <p className="transaction-list-column-title-amount">Amount</p>
             </div>
             {transactions.map((transaction) => (
@@ -41,13 +58,19 @@ const TransactionList = ({transactions}) => {
                         {transaction.accountName}
                     </div>
                     <div className="transaction_element__date" key={transaction.time + transaction.id}>
-                        {String(new Date(transaction.time).getMonth()).padStart(2, "0")}/{String(new Date(transaction.time).getDate()).padStart(2,'0')}/{new Date(transaction.time).getFullYear()} {String(new Date(transaction.time).getHours()).padStart(2,'0')}:{String(new Date(transaction.time).getMinutes()).padStart(2,'0')}
+                        {String(new Date(transaction.time).getMonth()).padStart(2, "0")}/{String(new Date(transaction.time).getDate()).padStart(2,'0')}/{new Date(transaction.time).getFullYear()}
                     </div>
                     <div className="transaction_element__amount" key={transaction.id + transaction.amount}>
                         {<BalanceNumber amount={transaction.amount}></BalanceNumber>}
                     </div>
                 </div>
             ))}
+            <div className="transaction-list-nav">
+                <NavButton className="nav-btn" currentPage={currentPage} getTransactions={getTransactions} itemsPerPage="5" size={transactionsNumber} type="first" setCurrentPage={setCurrentPage}></NavButton>
+                <NavButton className="nav-btn" currentPage={currentPage} getTransactions={getTransactions} itemsPerPage="5" size={transactionsNumber} type="previous" setCurrentPage={setCurrentPage}></NavButton>
+                <NavButton className="nav-btn" currentPage={currentPage} getTransactions={getTransactions} itemsPerPage="5" size={transactionsNumber} type="next" setCurrentPage={setCurrentPage}></NavButton>
+                <NavButton className="nav-btn" currentPage={currentPage} getTransactions={getTransactions} itemsPerPage="5" size={transactionsNumber} type="last" setCurrentPage={setCurrentPage}></NavButton>
+            </div>
         </div>
     )
 }

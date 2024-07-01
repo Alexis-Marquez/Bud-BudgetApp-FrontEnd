@@ -1,4 +1,3 @@
-import api from './API/axiosConfig.js';
 import {useState, useEffect} from 'react';
 import Layout from './components/Layout.jsx';
 import {Routes, Route} from 'react-router-dom';
