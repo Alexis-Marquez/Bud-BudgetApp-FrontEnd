@@ -1,8 +1,15 @@
 import React, {useEffect, useState} from "react";
 import api from "../../API/axiosConfig.js";
 import ModalToggle from "./ModalToggle";
+import {useForm} from "react-hook-form";
 const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})=>{
 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
     const [formValue, setFormValue] = React.useState({
         Amount: '',
         DateTime: '',
@@ -19,7 +26,7 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})
             [event.target.name]: event.target.value
         });
     }
-    const handleSubmit = async() => {
+    const onSubmit = async() => {
         event.preventDefault();
         let type;
         let amount;
@@ -49,7 +56,7 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})
         })
     }
     return (
-        <form className="form-transaction" onSubmit={handleSubmit}
+        <form className="form-transaction" onSubmit={handleSubmit(onSubmit)}
               style={{background: isToggled ? 'rgb(103,134,103)' : 'rgb(107,47,47)'}}>
             <ModalToggle handleToggle={handleToggle} isToggled={isToggled}></ModalToggle>
             <div className="form-body">
@@ -58,43 +65,50 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})
                         <label htmlFor="amount-input">Amount: </label>
                         <input type="text" placeholder="00.00" id="amount-input" inputMode="numeric"
                                onChange={handleChange}
-                               name="Amount"/>
+                               name="Amount"
+                               {...register("Amount",{required: true})}
+                        />
+                        {errors.Amount && <span className="input-required-error">This field is required</span>}
                     </div>
                     <div className="input-group">
                         <label htmlFor="name-input">Name: </label>
-                        <input type="text" id="name-input" placeholder="Name for your transaction" onChange={handleChange} name="Name"/>
+                        <input autoComplete= "off" type="text" id="name-input" placeholder="Name for your transaction" onChange={handleChange} name="Name" {...register("Name",{required: true})}/>
+                        {errors.Name && <span className="input-required-error">This field is required</span>}
                     </div>
                 </div>
             </div>
             <div className="form-group">
                 <div className="input-group">
                     <label htmlFor="category-input">Category: </label>
-                    <select id="account-input" name="Category" onChange={handleChange} defaultValue="">
+                    <select id="account-input" name="Category" onChange={handleChange} defaultValue="" {...register("Category",{required: true})}>
                         <option value="" disabled>Choose a category</option>
                         {categories?.map((category) => (
                             <option key={category.id} value={category.name}>{category.name}</option>
                         ))}</select>
+                    {errors.Category && <span className="input-required-error">This field is required</span>}
                 </div>
                 <div className="input-group">
                     <label htmlFor="account-input">Account</label>
-                    <select id="account-input" name="AccountId" onChange={handleChange} defaultValue="">
+                    <select id="account-input" name="AccountId" onChange={handleChange} defaultValue="" {...register("AccountId",{required: true})}>
                         <option value="" disabled>Choose an account</option>
                         {accounts.map((account) => (
                             <option key={account.accountId} value={account.accountId}>{account.name}</option>
                         ))}</select>
+                    {errors.AccountId && <span className="input-required-error">This field is required</span>}
                 </div>
             </div>
             <div className="form-group">
                 <div className="input-group-col">
                     <label htmlFor="datetime-input">Date: </label>
                     <input type="date" placeholder="00:00" id="datetime-input" inputMode="numeric"
-                           onChange={handleChange} name="DateTime"/>
+                           onChange={handleChange} name="DateTime" {...register("DateTime",{required: true})}/>
+                    {errors.DateTime && <span className="input-required-error">This field is required</span>}
                 </div>
             </div>
             <div className="form-group">
                 <div className="input-group-col">
                     <label htmlFor="description-input">Description: </label>
-                    <textarea id="description-input" onChange={handleChange} placeholder="Optional short description" name="Description"/>
+                    <textarea id="description-input" onChange={handleChange} placeholder="Optional short description" name="Description" {...register("Description")}/>
                 </div>
             </div>
             <button type="submit" style={{backgroundColor: isToggled ? 'rgb(103,134,103)' : 'rgb(107,47,47)'}}> Submit</button>

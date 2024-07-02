@@ -4,15 +4,16 @@ import proxy from 'vite-plugin-proxy';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://192.168.1.82:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
       },
     },
   },
+  plugins: [react()],
 });
 

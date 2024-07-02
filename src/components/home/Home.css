@@ -11,7 +11,7 @@
     height: max-content;
     width: 90vw;
     margin-left: 5vw;
-    margin-top: 10vh;
+    margin-top: 15vh;
 }
 .dashboard-card{
     grid-area: dashboard-card;
@@ -108,7 +108,7 @@
 @media only screen and (max-width: 600px) {
     #page-body{
         justify-items: center;
-        margin-top: 5vh;
+        margin-top: 10vh;
     }
     .dashboard-card{
         align-items: center;

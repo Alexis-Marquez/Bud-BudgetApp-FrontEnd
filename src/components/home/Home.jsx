@@ -20,30 +20,30 @@ const Home = ()=>{
 
     let total = 0
     useEffect(() => {
-        authService.login("qewfhf@gmail.com", "1234").then((response)=> {
+       //authService.login("qewfhf@gmail.com", "1234").then(()=> {
             console.log(authService.getCurrentUser());
-            userService.getAllAccounts().then((response)=> {
-                setAccounts(response.data);
-                userService.getTransactionsPage(1).then((response)=> {
-                    setTransactions(response.data);
-                    userService.getLatestBudget().then((response)=> {
-                        setCurrBudget(response.data);
-                        setCategories(currBudget.categories);
-                        userService.getTransactionSize().then((response)=>{
-                            setTransactionsNumber(response);
+            userService.getAllAccounts().then((response) => {
+                    setAccounts(response.data);
+                    userService.getTransactionsPage(1).then((response) => {
+                        setTransactions(response.data);
+                        userService.getLatestBudget().then((response) => {
+                            setCurrBudget(response.data);
+                            setCategories(currBudget.categories);
+                            userService.getTransactionSize().then((response) => {
+                                setTransactionsNumber(response);
+                            })
                         })
                     })
-                })
-            },
-            (error) => {
-                const _content =
-                    (error.response && error.response.data) ||
-                    error.message ||
-                    error.toString();
-                // setContent(_content);
-            }
-        );
-        })
+                },
+                (error) => {
+                    const _content =
+                        (error.response && error.response.data) ||
+                        error.message ||
+                        error.toString();
+                    // setContent(_content);
+                }
+            )
+       // })
     }, []);
 
     useEffect(()=>{

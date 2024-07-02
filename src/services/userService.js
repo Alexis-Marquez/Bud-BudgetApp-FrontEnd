@@ -2,7 +2,7 @@ import axios from "axios";
 import authService from "./authService.js";
 
 const currUserId = authService.getCurrentUser();
-const API_URL = "http://localhost:8080/api/"+currUserId+"/";
+const API_URL = "http://192.168.1.82:8080/api/"+currUserId+"/";
 
 const getLatestBudget = () => {
     return axios.get(API_URL + "latestBudget", { withCredentials: true });
