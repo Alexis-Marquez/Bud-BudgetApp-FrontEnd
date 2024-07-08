@@ -2,7 +2,7 @@ import React from 'react';
 import InfoCardNav from "./InfoCardNav.jsx";
 import "./TopBar.css";
 import Profile from "./Profile.jsx";
-const TopBar = () => {
+const TopBar = ({setShowLogin}) => {
     return (
         <nav className="top-bar">
             <div className="top-bar-left">
@@ -12,7 +12,7 @@ const TopBar = () => {
            <InfoCardNav ></InfoCardNav>
             </div>
             <div className="top-bar-right">
-            <Profile> </Profile>
+            <Profile setShowLogin={setShowLogin}> </Profile>
             </div>
         </nav>
     )

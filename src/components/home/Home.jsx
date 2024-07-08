@@ -8,7 +8,11 @@ import EditBudgetButton from "./EditBudgetButton.jsx";
 import DashboardBudget from "./DashboardBudget.jsx";
 import userService from "../../services/userService.js";
 import authService from "../../services/authService.js";
+import LandingPage from "../landingPage/LandingPage.jsx";
+import {useNavigate} from "react-router-dom";
+import {AxiosError} from "axios";
 const Home = ()=>{
+    const navigate = useNavigate();
     const [totalBalance, setTotalBalance] = useState(null);
     const [transactions, setTransactions] = useState([]);
     const[showTransForm, setShowTransForm] = useState(false);
@@ -17,11 +21,10 @@ const Home = ()=>{
     const [categories, setCategories] = useState([]);
     const [accounts, setAccounts] = useState();
     const [transactionsNumber, setTransactionsNumber] = useState(0);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     let total = 0
     useEffect(() => {
-       //authService.login("qewfhf@gmail.com", "1234").then(()=> {
-            console.log(authService.getCurrentUser());
             userService.getAllAccounts().then((response) => {
                     setAccounts(response.data);
                     userService.getTransactionsPage(1).then((response) => {
@@ -34,16 +37,12 @@ const Home = ()=>{
                             })
                         })
                     })
-                },
-                (error) => {
-                    const _content =
-                        (error.response && error.response.data) ||
-                        error.message ||
-                        error.toString();
-                    // setContent(_content);
                 }
-            )
-       // })
+            ).catch((err)=>{
+                if(err.response.status === 403) {
+                    navigate('/');
+                }
+            })
     }, []);
 
     useEffect(()=>{
@@ -68,19 +67,22 @@ const Home = ()=>{
             </div>
     )
     }
-    return(
-        <div id="page-body">
-            <EditBudgetButton></EditBudgetButton>
-            <SearchBar></SearchBar>
-            <TransFormModal showTransForm={showTransForm} accounts={accounts} setShowTransForm={setShowTransForm} categories={categories}></TransFormModal>
-            <DashboardCard AccountsTotalBalance={totalBalance} budgetBalance={currBudget}></DashboardCard>
-            <DashboardBudget showBudget={showBudget} transactionList={transactions} categories={categories}></DashboardBudget>
-            <div className="trans-button">
-            <button className="add-trans-button" onClick={()=>setShowTransForm(true)}> Add Transaction</button>
+    return (
+            <div id="page-body">
+                <EditBudgetButton></EditBudgetButton>
+                <SearchBar></SearchBar>
+                <TransFormModal showTransForm={showTransForm} accounts={accounts} setShowTransForm={setShowTransForm}
+                                categories={categories}></TransFormModal>
+                <DashboardCard AccountsTotalBalance={totalBalance} budgetBalance={currBudget}></DashboardCard>
+                <DashboardBudget showBudget={showBudget} transactionList={transactions}
+                                 categories={categories}></DashboardBudget>
+                <div className="trans-button">
+                    <button className="add-trans-button" onClick={() => setShowTransForm(true)}> Add Transaction
+                    </button>
+                </div>
+                <TransactionList transactions={transactions} transactionNumber={transactionsNumber}></TransactionList>
             </div>
-            <TransactionList transactions={transactions} transactionNumber={transactionsNumber}></TransactionList>
-        </div>
-    )
-}
+        )
+    }
 
 export default Home

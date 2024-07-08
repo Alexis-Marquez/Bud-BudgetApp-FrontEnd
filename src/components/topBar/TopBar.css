@@ -43,11 +43,24 @@
     padding-left: 2em;
     padding-right: 2em;
     color: white;
+    text-decoration: none;
 }
-.top-text:hover{
-    color: lightgreen;
+.sign-in-btn{
+    background-color: black;
+    color: white;
+    width: 60%;
+    height: 100%;
+    border-radius: 4px;
+    border: none;
+}
+.top-bar-right{
+    width: 10%;
+    height: 40%;
 }
 .profile-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 @media only screen and (max-width: 600px) {
     .top-bar {

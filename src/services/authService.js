@@ -10,21 +10,21 @@ const register = (username, name, password) => {
     }, { withCredentials: true });
 };
 
-const login = (username, password) => {
+const login = async (username, password) => {
     return axios
         .post(API_URL + "log-in", {
             username,
             password,
         }, { withCredentials: true })
-        .then((response) => {
-            localStorage.setItem("userId", response.data);
+        .then(async (response) => {
+            await localStorage.setItem("userId", response.data);
             return response.data;
         });
 };
 
-const logout = () => {
-    localStorage.removeItem("userId");
-    return axios.post(API_URL + "sign-out", { withCredentials: true }).then((response) => {
+const logout = async () => {
+    await localStorage.removeItem("userId");
+    axios.post(API_URL + "sign-out", { withCredentials: true }, { withCredentials: true }).then((response) => {
         return response.data;
     });
 };

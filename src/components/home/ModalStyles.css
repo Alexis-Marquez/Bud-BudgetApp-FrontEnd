@@ -13,8 +13,8 @@
     border: 1px solid;
     top: 50%;
     left: 50%;
-    width: 40%;
-    height: 60%;
+    width: 30%;
+    height: 90%;;
     transform: translate(-50%, -50%);
     transition: 0.2s;
     background-color: #1e1e1e;
@@ -76,10 +76,11 @@
     height: 50%;
     border-radius: 8px;
     border-color: #9fee9f;
+    cursor: pointer;
 }
 .modal-header-section{
     display: flex;
-    width: 33%;
+    width: 35%;
     justify-content: center;
 }
 .modal-header-button-section{

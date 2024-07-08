@@ -64,23 +64,21 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})
                     <div className="input-group">
                         <label htmlFor="amount-input">Amount: </label>
                         <input type="text" placeholder="00.00" id="amount-input" inputMode="numeric"
-                               onChange={handleChange}
                                name="Amount"
-                               {...register("Amount",{required: true})}
+                               {...register("Amount",{required: true, onChange:(e)=>{handleChange(e)}})}
                         />
                         {errors.Amount && <span className="input-required-error">This field is required</span>}
                     </div>
                     <div className="input-group">
                         <label htmlFor="name-input">Name: </label>
-                        <input autoComplete= "off" type="text" id="name-input" placeholder="Name for your transaction" onChange={handleChange} name="Name" {...register("Name",{required: true})}/>
+                        <input autoComplete= "off" type="text" id="name-input" placeholder="Name for your transaction" name="Name" {...register("Name",{required: true,onChange:(e)=>{handleChange(e)}})}/>
                         {errors.Name && <span className="input-required-error">This field is required</span>}
                     </div>
                 </div>
-            </div>
             <div className="form-group">
                 <div className="input-group">
                     <label htmlFor="category-input">Category: </label>
-                    <select id="account-input" name="Category" onChange={handleChange} defaultValue="" {...register("Category",{required: true})}>
+                    <select id="account-input" name="Category" defaultValue="" {...register("Category",{required: true, onChange:(e)=>{handleChange(e)}})}>
                         <option value="" disabled>Choose a category</option>
                         {categories?.map((category) => (
                             <option key={category.id} value={category.name}>{category.name}</option>
@@ -89,7 +87,7 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})
                 </div>
                 <div className="input-group">
                     <label htmlFor="account-input">Account</label>
-                    <select id="account-input" name="AccountId" onChange={handleChange} defaultValue="" {...register("AccountId",{required: true})}>
+                    <select id="account-input" name="AccountId"  defaultValue="" {...register("AccountId",{required: true, onChange:(e)=>{handleChange(e)}})}>
                         <option value="" disabled>Choose an account</option>
                         {accounts.map((account) => (
                             <option key={account.accountId} value={account.accountId}>{account.name}</option>
@@ -101,15 +99,16 @@ const TransForm = ({accounts, handleClose, isToggled, handleToggle, categories})
                 <div className="input-group-col">
                     <label htmlFor="datetime-input">Date: </label>
                     <input type="date" placeholder="00:00" id="datetime-input" inputMode="numeric"
-                           onChange={handleChange} name="DateTime" {...register("DateTime",{required: true})}/>
+                            name="DateTime" {...register("DateTime",{required: true, onChange:(e)=>{handleChange(e)}})}/>
                     {errors.DateTime && <span className="input-required-error">This field is required</span>}
                 </div>
             </div>
             <div className="form-group">
                 <div className="input-group-col">
                     <label htmlFor="description-input">Description: </label>
-                    <textarea id="description-input" onChange={handleChange} placeholder="Optional short description" name="Description" {...register("Description")}/>
+                    <textarea id="description-input"  placeholder="Optional short description" name="Description" {...register("Description",{onChange:(e)=>{handleChange(e)}})}/>
                 </div>
+            </div>
             </div>
             <button type="submit" style={{backgroundColor: isToggled ? 'rgb(103,134,103)' : 'rgb(107,47,47)'}}> Submit</button>
         </form>
