@@ -11,6 +11,7 @@ import authService from "../../services/authService.js";
 import LandingPage from "../landingPage/LandingPage.jsx";
 import {useNavigate} from "react-router-dom";
 import {AxiosError} from "axios";
+import BudgetModal from "../accountBudgetModal/BudgetModal.jsx";
 const Home = ()=>{
     const navigate = useNavigate();
     const [totalBalance, setTotalBalance] = useState(null);
@@ -21,7 +22,7 @@ const Home = ()=>{
     const [categories, setCategories] = useState([]);
     const [accounts, setAccounts] = useState();
     const [transactionsNumber, setTransactionsNumber] = useState(0);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [showBudgetModal, setShowBudgetModal] = useState(false);
 
     let total = 0
     useEffect(() => {
@@ -73,6 +74,7 @@ const Home = ()=>{
                 <SearchBar></SearchBar>
                 <TransFormModal showTransForm={showTransForm} accounts={accounts} setShowTransForm={setShowTransForm}
                                 categories={categories}></TransFormModal>
+                <BudgetModal showBudget={showBudgetModal} setShowBudget={setShowBudgetModal}></BudgetModal>
                 <DashboardCard AccountsTotalBalance={totalBalance} budgetBalance={currBudget}></DashboardCard>
                 <DashboardBudget showBudget={showBudget} transactionList={transactions}
                                  categories={categories}></DashboardBudget>
