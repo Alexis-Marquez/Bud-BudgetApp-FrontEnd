@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
 import React from "react";
 
-const BudgetModal = ({setShowNewAccountModal, showNewAccountModal})=>{
-    if(!showNewAccountModal){
+const BudgetModal = ({setShowBudget, showBudget})=>{
+    if(!showBudget){
         return null
     }
-    const handleClose=()=>{setShowNewAccountModal(false);window.location.reload();};
+    const handleClose=()=>{setShowBudget(false);window.location.reload();};
     return ReactDOM.createPortal(
         <>
             <div className="overlay">
@@ -18,8 +18,7 @@ const BudgetModal = ({setShowNewAccountModal, showNewAccountModal})=>{
                         <h2></h2>
                     </div>
                     <div className="modal-header-button-section">
-                        <button className="btn-close" onClick={handleClose}
-                        >X
+                        <button className="btn-close" onClick={handleClose}>X
                         </button>
                     </div>
                 </div>
