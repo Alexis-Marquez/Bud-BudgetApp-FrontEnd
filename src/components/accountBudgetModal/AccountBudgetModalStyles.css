@@ -1,0 +1,19 @@
+.modal-budget-form-container{
+    width: 60%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.modal-budget-header{
+    display: block;
+}
+.modal-budget-title{
+    color: #747bff;
+}
+.account-modal-form{
+    display: flex;
+}
+.account-modal-form_body{
+    display: flex;
+}
