@@ -29,6 +29,7 @@ const Home = ()=>{
 
     let total = 0
     useEffect(() => {
+        try {
             userService.getAllAccounts().then((response) => {
                     setAccounts(response.data);
                     userService.getTransactionsPage(1).then((response) => {
@@ -42,12 +43,13 @@ const Home = ()=>{
                         })
                     })
                 }
-            ).catch((err)=>{
-                if(err.response.status === 403) {
-                    authService.logout();
+            ).catch((err) => {
+                if (err.response.status === 403) {
                     navigate('/');
                 }
             })
+        }catch(err) {
+        }
     }, []);
 
     useEffect(()=>{
@@ -77,8 +79,7 @@ const Home = ()=>{
                 <SearchBar></SearchBar>
                 <TransFormModal showTransForm={showTransForm} accounts={accounts} setShowTransForm={setShowTransForm}
                                 categories={categories}></TransFormModal>
-                <BudgetModal showBudget={showBudgetModal} setShowBudget={setShowBudgetModal}></BudgetModal>
-                <AccountsModal setShowNewAccountModal={setShowAccountModal} showNewAccountModal={showAccountModal}></AccountsModal>
+                <AccountsModal setShowNewAccountModal={setShowAccountModal} showNewAccountModal={showAccountModal} setShowBudgetModal={showBudgetModal} showBudgetModal={showBudgetModal}></AccountsModal>
                 <DashboardCard AccountsTotalBalance={totalBalance} budgetBalance={currBudget}></DashboardCard>
                 <DashboardBudget showBudget={showBudget} transactionList={transactions}
                                  categories={categories}></DashboardBudget>

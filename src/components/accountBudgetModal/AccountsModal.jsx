@@ -3,12 +3,14 @@ import React, {useState} from "react";
 import "./AccountBudgetModalStyles.css"
 import userService from "../../services/userService.js";
 import AccountModalForm from "./AccountModalForm.jsx";
-const AccountModal = ({setShowNewAccountModal, showNewAccountModal})=>{
-    const [showForm, setShowForm] = useState(false);
-    if(!showNewAccountModal){
+const AccountModal = ({setShowNewAccountModal, showNewAccountModal, showBudgetModal, setShowBudgetModal})=>{
+    const [showAccountForm, setShowAccountForm] = useState(false);
+    const [showBudgetForm, setShowBudgetForm] = useState(false);
+    if(!showNewAccountModal && !showBudgetModal){
         return null
     }
-    const handleClose=()=>{setShowNewAccountModal(false);setShowForm(false);window.location.reload();};
+    const handleClose=()=>{setShowNewAccountModal(false);setShowAccountForm(false);setShowBudgetForm(false);
+        setShowBudgetModal(false);window.location.reload();};
 
     async function handleCancel() {
         await userService.createAccount({"type": "default", "name": "default account"})
@@ -18,30 +20,43 @@ const AccountModal = ({setShowNewAccountModal, showNewAccountModal})=>{
     return ReactDOM.createPortal(
         <>
             <div className="overlay"></div>
-            {!showForm && <div className="info-modal">
+            {!showAccountForm && !showBudgetForm &&
                 <div className="modal-budget-form-container">
                     <div className="modal-budget-header">
-                        <h2 className="modal-budget-title">It looks like you don't have an account set up</h2>
+                        {showNewAccountModal&&<h2 className="modal-budget-title">It looks like you don't have an account set up</h2>}
+                        {showBudgetModal&&<h2 className="modal-budget-title">Set up your monthly budget to start tracking!</h2>}
                     </div>
+
+                    {showNewAccountModal&&
                     <div className="modal-body">
                         <div>An account will allow you to track your income and expenses</div>
                         <div>You can have multiple accounts to track different things if you wish!</div>
                         <div>(We will not ask for any banking details)</div>
-                    </div>
+                    </div>}
+
+                    {showBudgetModal&&
+                        <div className="modal-body">
+                            <div>Your budget can track as many categories as you want</div>
+                            <div></div>
+                        </div>
+                    }
+
                     <div className="modal-footer">
-                        <div>
-                            <button onClick={handleCancel}>Skip and use default account</button>
+                        {showNewAccountModal &&
+                            <div>
+                                <div>
+                                    <button onClick={handleCancel}>Skip and use default account</button>
                         </div>
                         <div>
                             <button onClick={() => {
-                                setShowForm(true);
+                                setShowAccountForm(true);
                             }} className="next-page-modal"> Continue
                             </button>
                         </div>
+                            </div>}
                     </div>
-                </div>
             </div>}
-            {showForm && <AccountModalForm handleClose={handleClose}></AccountModalForm>}
+            {showAccountForm && <AccountModalForm handleClose={handleClose}></AccountModalForm>}
         </>
         , document.getElementById('page-body'));
 }

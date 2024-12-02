@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://192.168.1.82:8080/api/auth/";
+const API_URL = "https://192.168.1.82:8443/api/auth/";
 
 const register = (username, name, password) => {
     return axios.post(API_URL + "new-user", {
@@ -26,7 +26,9 @@ const logout = async () => {
     await localStorage.removeItem("userId");
     axios.post(API_URL + "sign-out", { withCredentials: true }, { withCredentials: true }).then((response) => {
         return response.data;
-    });
+    }).catch((err)=>{
+        // console.log(err);
+    })
 };
 
 const getCurrentUser = () => {

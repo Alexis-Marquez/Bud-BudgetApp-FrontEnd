@@ -4,7 +4,7 @@ import authService from "./authService.js";
 let currUserId;
 let API_URL;
 const instance = axios.create({
-    baseURL: "http://192.168.1.82:8080/api/",
+    baseURL: "https://192.168.1.82:8443/api/",
     withCredentials:true
 });
 const setUserId = userId => {
@@ -27,6 +27,10 @@ const getTransactionsPage = async (page) => {
     return await instance.get(API_URL+"transactions/" + page);
 };
 
+const getCategories = async ()=>{
+    return await instance.get(API_URL+"categories");
+}
+
 const getTransactionSize = async () => {
     return await instance.get(API_URL+"transactions/size");
 };
@@ -43,7 +47,7 @@ instance.interceptors.response.use(
     },
     async (err) => {
         const originalConfig = err.config;
-        if (originalConfig.url !== "/auth/log-in" && originalConfig.url !== "/auth/refresh-token" && err.response) {
+        if (originalConfig.url !== "/auth/log-in" && originalConfig.url !== "/auth/refresh-token" && originalConfig.url !== "/auth/sign-out" &&err.response) {
             if (!originalConfig._retry) {
                 originalConfig._retry = false;
             }
@@ -70,7 +74,8 @@ const UserService = {
     getTransactionsPage,
     getTransactionSize,
     getCurrentUserInfo,
-    createAccount
+    createAccount,
+    getCategories
 }
 
 export default UserService;
